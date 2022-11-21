@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  
+<body style="text-align:center;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: rgb(25,25,25);color:white">
+    <h2>Farmhand Item Generator</h2>
+   
+    Registry Name: <input type="text" id="Registry" value="iron_sword">
+    <p></p>
+    Item Name: <input type="text" id="ItemName" value="Iron Greatsword">
+    <p></p>
+    Rarity: <select id="Rarity"><option value="Common">Common</option>
+                               <option value="Uncommon">Uncommon</option>
+                               <option value="Rare">Rare</option>
+                               <option value="Very Rare">Very Rare</option>
+                               <option value="Legendary">Legendary</option>
+    </select>
+    <p></p>
+    Health: <input type="number" id="Health" value="0">
+    <p></p>
+    Armor: <input type="number" id="Armor" value="0">
+    <p></p>
+    Attack Speed: <select id="AttackSpeed"><option value="Very Slow">Very Slow</option>
+                                      <option value="Slow">Slow</option>
+                                      <option value="Normal">Normal</option>
+                                      <option value="Fast">Fast</option>
+                                      <option value="Very Fast">Very Fast</option>
+                                      <option value="Not Weapon">Not Weapon</option>
+    </select>
+    <p></p>
+    Damage: <input type="number" id="Damage" value="12">
+    <p></p>
+    Movement Speed: <input type="number" id="MovementSpeed" value="0.05">
+    <p></p>
+    Slot: <select id="Slot"><option value="mainhand">mainhand</option>
+        <option value="offhand">offhand</option>
+        <option value="feet">feet</option>
+        <option value="legs">legs</option>
+        <option value="chest">chest</option>
+        <option value="head">head</option>
+    </select>
+    <p></p>
+    Optional Lore: <input type="text" id="OptionalLore" value="lol cool sword">
+    <p></p>
+    <button type="button" onclick="Generate()">Generate</button>
+    <p id="final"></p>
+  
+      
+    <script>
+        function Generate() {
+            var Registry = document.getElementById("Registry").value;
+            var Name = document.getElementById("ItemName").value;
+            var Health = document.getElementById("Health").value;
+            var Armor = document.getElementById("Armor").value;
+            var Damage = document.getElementById("Damage").value;
+            var MovementSpeed = document.getElementById("MovementSpeed").value;
+            var R = document.getElementById("Rarity");
+            var Rarity = R.options[R.selectedIndex].text;
+            var S = document.getElementById("Slot");
+            var Slot = S.options[S.selectedIndex].text;
+            var A = document.getElementById("AttackSpeed");
+            var AttackSpeed = A.options[A.selectedIndex].text;
+            var OptionalLore = document.getElementById("OptionalLore").value;
+
+            /*Pretty bad case function for name coloring*/
+            if (Rarity=="Common") {
+                var NameColor = "gray"
+            }else if (Rarity=="Uncommon") {
+                var NameColor = "light_purple"
+            }else if (Rarity=="Rare") {
+                var NameColor = "yellow"
+            }else if (Rarity=="Very Rare") {
+                var NameColor = "aqua"
+            }else if (Rarity=="Legendary") {
+                var NameColor = "red"
+            }else {
+                var NameColor = "black"
+            }
+
+
+            if (AttackSpeed=="Very Slow") {
+                var AttackSpeedNum = -3
+            }else if (AttackSpeed=="Slow") {
+                var AttackSpeedNum = -2
+            }else if (AttackSpeed=="Normal") {
+                var AttackSpeedNum = 0
+            }else if (AttackSpeed=="Fast") {
+                var AttackSpeedNum = 0.6
+            }else if (AttackSpeed=="Very Fast") {
+                var AttackSpeedNum = 1.2
+            }else {
+                var AttackSpeedNum = 0
+            }
+
+            /*checks attack speed to make sure it is a weapon*/
+            if (AttackSpeed=="Not Weapon") {
+                var Lore1 = `['{"text":"[`+Rarity+`]","color":"dark_green","bold":true,"italic":false}','{"text":" ","color":"blue","italic":false}'`
+            }else{
+                var Lore1 = `['{"text":"[`+Rarity+`]","color":"dark_green","bold":true,"italic":false}','{"text":"`+Math.abs(Math.round((1.6+AttackSpeedNum)*Damage*10)/10)+` DPS","color":"blue","italic":false}','{"text":" ","color":"blue","italic":false}','{"text":"`+AttackSpeed+` Attack Speed","color":"gold","italic":false}'`
+            }
+
+            /*Finishes lore by running through stats & lore strings*/
+            if (Health != 0) {
+                Lore1 = Lore1 + `,'{"text":"Health +`+Health+`","color":"gold","bold":false,"italic":false}'`
+            }
+            if (Armor != 0) {
+                Lore1 = Lore1 + `,'{"text":"Armor +`+Armor+`","color":"gold","bold":false,"italic":false}'`
+            }
+            if (Damage != 0) {
+                Lore1 = Lore1 + `,'{"text":"Damage +`+Damage+`","color":"gold","bold":false,"italic":false}'`
+            }
+            if (MovementSpeed != 0) {
+                Lore1 = Lore1 + `,'{"text":"Speed +`+MovementSpeed+`","color":"gold","bold":false,"italic":false}'`
+            }
+            if (OptionalLore){
+                Lore1 = Lore1 + `,'{"text":" ","color":"gold","bold":false,"italic":false}','{"text":"\\\\\"`+OptionalLore+`\\\\\"","color":"dark_gray","bold":false,"italic":true}'`
+            }
+            Lore1 = Lore1 + ']}'
+            document.getElementById("final").innerHTML = `/give @p `+Registry+`{HideFlags:127,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:0,UUID:[I;8116770,2106999621,-1843899657,1702435997],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:0,UUID:[I;-1952952880,-550679970,-1373907031,-337602578],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;1596154041,-287355849,-1808576243,2108787363],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:0,UUID:[I;-263764380,274091350,-2134736363,915510944],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:0,UUID:[I;1523449956,-1893710583,-1901828829,-991441622],Slot:"`+Slot+`"}]} 1`;
+        }
+    </script>
+</body>
+  
+</html>
