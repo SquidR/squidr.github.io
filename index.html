@@ -187,7 +187,7 @@
             if (Health != 0 && HOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Health +`+Health+`","color":"gold","bold":false,"italic":false}'`
             }else if (Health != 0 && HOIndex == 1) {
-                if (Health << 0) {
+                if (Health <= 0) {
                     Lore1 = Lore1 + `,'{"text":"Health -%`+Math.abs(Health*100)+`","color":"gold","bold":false,"italic":false}'`
                 } else {
                     Lore1 = Lore1 + `,'{"text":"Health +%`+Math.abs(Health*100)+`","color":"gold","bold":false,"italic":false}'`
@@ -199,7 +199,7 @@
             if (Armor != 0 && AOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Armor +`+Armor+`","color":"gold","bold":false,"italic":false}'`
             }else if (Armor != 0 && AOIndex == 1) {
-                if (Armor << 0) {
+                if (Armor <= 0) {
                     Lore1 = Lore1 + `,'{"text":"Armor -%`+Math.abs(Armor*100)+`","color":"gold","bold":false,"italic":false}'`
                 } else {
                     Lore1 = Lore1 + `,'{"text":"Armor +%`+Math.abs(Armor*100)+`","color":"gold","bold":false,"italic":false}'`
@@ -211,7 +211,7 @@
             if (Damage != 0 && DOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Damage +`+Damage+`","color":"gold","bold":false,"italic":false}'`
             }else if (Damage != 0 && DOIndex == 1) {
-                if (Damage << 0) {
+                if (Damage <= 0) {
                     Lore1 = Lore1 + `,'{"text":"Damage -%`+Math.abs(Damage*100)+`","color":"gold","bold":false,"italic":false}'`
                 } else {
                     Lore1 = Lore1 + `,'{"text":"Damage +%`+Math.abs(Damage*100)+`","color":"gold","bold":false,"italic":false}'`
@@ -223,7 +223,7 @@
             if (MovementSpeed != 0 && MSOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Speed +`+MovementSpeed+`","color":"gold","bold":false,"italic":false}'`
             }else if (MovementSpeed != 0 && MSOIndex == 1) {
-                if (MovementSpeed << 0) {
+                if (MovementSpeed <= 0) {
                     Lore1 = Lore1 + `,'{"text":"Speed -%`+Math.abs(MovementSpeed*100)+`","color":"gold","bold":false,"italic":false}'`
                 } else {
                     Lore1 = Lore1 + `,'{"text":"Speed +%`+Math.abs(MovementSpeed*100)+`","color":"gold","bold":false,"italic":false}'`
