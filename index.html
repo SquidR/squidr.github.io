@@ -16,16 +16,24 @@
     Item Name: <input type="text" id="ItemName" value="Iron Greatsword">
     <p></p>
     Rarity: <select id="Rarity"><option value="Common">Common</option>
-                               <option value="Uncommon">Uncommon</option>
-                               <option value="Rare">Rare</option>
-                               <option value="Very Rare">Very Rare</option>
-                               <option value="Legendary">Legendary</option>
-                               <option value="Quest">Quest</option>
+                                <option value="Uncommon">Uncommon</option>
+                                <option value="Rare">Rare</option>
+                                <option value="Very Rare">Very Rare</option>
+                                <option value="Legendary">Legendary</option>
+                                <option value="Quest">Quest</option>
     </select>
     <p></p>
     Health: <input type="number" id="Health" value="0">
+    <select id="HpOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                             <option value="Precentage">Precentage</option>
+                             <option value="Multiplicative">Multiplicative</option>
+    </select>
     <p></p>
     Armor: <input type="number" id="Armor" value="0">
+    <select id="ArmorOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                                <option value="Precentage">Precentage</option>
+                                <option value="Multiplicative">Multiplicative</option>
+    </select>
     <p></p>
     Attack Speed: <select id="AttackSpeed"><option value="Very Slow">Very Slow</option>
                                            <option value="Slow">Slow</option>
@@ -36,8 +44,16 @@
     </select>
     <p></p>
     Damage: <input type="number" id="Damage" value="12">
+    <select id="DmgOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                              <option value="Precentage">Precentage</option>
+                              <option value="Multiplicative">Multiplicative</option>
+    </select>
     <p></p>
     Movement Speed: <input type="number" id="MovementSpeed" value="0.05">
+    <select id="MoveSpdOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                                  <option value="Precentage">Precentage</option>
+                                  <option value="Multiplicative">Multiplicative</option>
+    </select>
     <p></p>
     Slot: <select id="Slot"><option value="mainhand">mainhand</option>
                             <option value="offhand">offhand</option>
@@ -76,10 +92,25 @@
         function Generate() {
             var Registry = document.getElementById("Registry").value;
             var Name = document.getElementById("ItemName").value;
+
             var Health = document.getElementById("Health").value;
+            var HO = document.getElementById("HpOperation");
+            var HOIndex = HO.selectedIndex;
+
             var Armor = document.getElementById("Armor").value;
+            var AO = document.getElementById("ArmorOperation");
+            var AOIndex = AO.selectedIndex;
+
             var Damage = document.getElementById("Damage").value;
+            var DO = document.getElementById("DmgOperation");
+            var DOIndex = DO.selectedIndex;
+
             var MovementSpeed = document.getElementById("MovementSpeed").value;
+            var MSO = document.getElementById("MoveSpdOperation");
+            var MSOIndex = MSO.selectedIndex;
+
+            console.log(HOIndex)
+
             var R = document.getElementById("Rarity");
             var Rarity = R.options[R.selectedIndex].text;
             var S = document.getElementById("Slot");
@@ -87,11 +118,7 @@
             var A = document.getElementById("AttackSpeed");
             var AttackSpeed = A.options[A.selectedIndex].text;
             var OptionalLore = document.getElementById("OptionalLore").value;
-            var r = document.getElementById('r').value
-            var g = document.getElementById('g').value
-            var b = document.getElementById('b').value
-            var LONG = b*256*256+g*256+r
-            console.log(LONG)
+
 
 
             /*Pretty bad case function for name coloring*/
@@ -157,24 +184,60 @@
             }
 
             /*Finishes lore by running through stats & lore strings*/
-            if (Health != 0) {
+            if (Health != 0 && HOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Health +`+Health+`","color":"gold","bold":false,"italic":false}'`
+            }else if (Health != 0 && HOIndex == 1) {
+                if (Health << 0) {
+                    Lore1 = Lore1 + `,'{"text":"Health -%`+Math.abs(Health*100)+`","color":"gold","bold":false,"italic":false}'`
+                } else {
+                    Lore1 = Lore1 + `,'{"text":"Health +%`+Math.abs(Health*100)+`","color":"gold","bold":false,"italic":false}'`
+                }
+            }else if (Health != 0 && HOIndex == 2) {
+                Lore1 = Lore1 + `,'{"text":"Health x`+Health+`","color":"gold","bold":false,"italic":false}'`
             }
-            if (Armor != 0) {
+
+            if (Armor != 0 && AOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Armor +`+Armor+`","color":"gold","bold":false,"italic":false}'`
+            }else if (Armor != 0 && AOIndex == 1) {
+                if (Armor << 0) {
+                    Lore1 = Lore1 + `,'{"text":"Armor -%`+Math.abs(Armor*100)+`","color":"gold","bold":false,"italic":false}'`
+                } else {
+                    Lore1 = Lore1 + `,'{"text":"Armor +%`+Math.abs(Armor*100)+`","color":"gold","bold":false,"italic":false}'`
+                }
+            }else if (Armor != 0 && AOIndex == 2) {
+                Lore1 = Lore1 + `,'{"text":"Armor x`+Armor+`","color":"gold","bold":false,"italic":false}'`
             }
-            if (Damage != 0) {
+
+            if (Damage != 0 && DOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Damage +`+Damage+`","color":"gold","bold":false,"italic":false}'`
+            }else if (Damage != 0 && DOIndex == 1) {
+                if (Damage << 0) {
+                    Lore1 = Lore1 + `,'{"text":"Damage -%`+Math.abs(Damage*100)+`","color":"gold","bold":false,"italic":false}'`
+                } else {
+                    Lore1 = Lore1 + `,'{"text":"Damage +%`+Math.abs(Damage*100)+`","color":"gold","bold":false,"italic":false}'`
+                }
+            }else if (Damage != 0 && DOIndex == 2) {
+                Lore1 = Lore1 + `,'{"text":"Damage x`+Damage+`","color":"gold","bold":false,"italic":false}'`
             }
-            if (MovementSpeed != 0) {
+
+            if (MovementSpeed != 0 && MSOIndex == 0) {
                 Lore1 = Lore1 + `,'{"text":"Speed +`+MovementSpeed+`","color":"gold","bold":false,"italic":false}'`
+            }else if (MovementSpeed != 0 && MSOIndex == 1) {
+                if (MovementSpeed << 0) {
+                    Lore1 = Lore1 + `,'{"text":"Speed -%`+Math.abs(MovementSpeed*100)+`","color":"gold","bold":false,"italic":false}'`
+                } else {
+                    Lore1 = Lore1 + `,'{"text":"Speed +%`+Math.abs(MovementSpeed*100)+`","color":"gold","bold":false,"italic":false}'`
+                }
+            }else if (MovementSpeed != 0 && MSOIndex == 2) {
+                Lore1 = Lore1 + `,'{"text":"Speed x`+MovementSpeed+`","color":"gold","bold":false,"italic":false}'`
             }
+
             if (OptionalLore){
                 Lore1 = Lore1 + `,'{"text":" ","color":"gold","bold":false,"italic":false}','{"text":"\\\\\"`+OptionalLore+`\\\\\"","color":"dark_gray","bold":false,"italic":true}'`
             }
 
             Lore1 = Lore1 + ']}'
-            document.getElementById("final").innerHTML = `/give @p `+Registry+`{HideFlags:127,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
+            document.getElementById("final").innerHTML = `/give @p `+Registry+`{HideFlags:127,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
         }
     </script>
 </body>
