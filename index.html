@@ -142,15 +142,15 @@
 
 
             if (AttackSpeed=="Very Slow") {
-                var AttackSpeedNum = -3.4
+                var AttackSpeedNum = -3.6
             }else if (AttackSpeed=="Slow") {
-                var AttackSpeedNum = -2.75
+                var AttackSpeedNum = -3
             }else if (AttackSpeed=="Normal") {
-                var AttackSpeedNum = 0
+                var AttackSpeedNum = -2.4
             }else if (AttackSpeed=="Fast") {
-                var AttackSpeedNum = 0.6
+                var AttackSpeedNum = -1.2
             }else if (AttackSpeed=="Very Fast") {
-                var AttackSpeedNum = 1.2
+                var AttackSpeedNum = 0
             }else {
                 var AttackSpeedNum = 0
             }
@@ -187,7 +187,7 @@
                     Lore1 = Lore1 + `,'{"text":" "}'`
                 }
             }else{
-                var Lore1 = `['{"text":"[`+Rarity+` `+ToolText+`]","color":"dark_green","bold":true,"italic":false}','{"text":"`+Math.abs(Math.round((4+AttackSpeedNum)*Damage*10)/10)/2+` DPS","color":"blue","italic":false}','{"text":" "}','{"text":"`+AttackSpeed+` Attack Speed","color":"gold","italic":false}'`
+                var Lore1 = `['{"text":"[`+Rarity+` `+ToolText+`]","color":"dark_green","bold":true,"italic":false}','{"text":"`+Math.abs(Math.round((AttackSpeedNum)*Damage*10)/10)/2+` DPS","color":"blue","italic":false}','{"text":" "}','{"text":"`+AttackSpeed+` Attack Speed","color":"gold","italic":false}'`
             }
 
             /*Finishes lore by running through stats & lore strings*/
