@@ -2,13 +2,24 @@
 <html>
 <head>
     <style>
-        .content {
-            background-color: rgb(20, 20, 20);
-            padding: 10px;
+        * {
+            color: #ffffff;
+            background: rgb(20, 20, 20);
+            box-sizing: flex;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: .33px;
+        }
+        input {
+            background: rgb(32, 32, 32);
+            border: 1px solid beige;
+        }
+        .button {
+            border: 1px solid beige;
+            background: rgb(32, 32, 32)
         }
     </style>
 </head>
-<body style="text-align:center;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background-color: rgb(25,25,25);color:white">
+<body style="text-align:center;">
     <h2>Farmhand Item Generator</h2>
    
     Registry Name: <input type="text" id="Registry" value="iron_sword">
@@ -70,26 +81,13 @@
     <p></p>
     Strip Attributes?: <input type="checkbox" id="AttStripCheck">
     <p></p>
-    Color for Leather Items (not implemented): <input id="r" type="number">
-                             <input id="g" type="number">
-                             <input id="b" type="number">
-    <button type="button" id="setcolor" onclick="SetColor()">Set Color</button>
-    <div class="content" id="Color"></div>
+    <button class="button" onclick="Generate()">Generate</button>
     <p></p>
-    <button type="button" onclick="Generate()">Generate</button>
-    <p id="final"></p>
-    <button type="button" onclick="Copy()">Copy</button>
+    <button class="button" onclick="Copy()" id="final"></button>
 
   
       
     <script>
-        function rgb(r, g, b) {
-            console.log(`rgb(${r}, ${g}, ${b});`);
-            return `rgb(${r}, ${g}, ${b})`
-        }
-        function SetColor() {
-            document.getElementById("Color").style.backgroundColor = rgb(document.getElementById('r').value,document.getElementById('g').value,document.getElementById('b').value)
-        }
         function Copy() {
             navigator.clipboard.writeText(document.getElementById("final").innerHTML)
         }
