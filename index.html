@@ -3,7 +3,7 @@
 <head>
     <style>
         * {
-            color: #ffffff;
+            color: white;
             background: rgb(20, 20, 20);
             box-sizing: flex;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,73 +17,84 @@
             border: 1px solid beige;
             background: rgb(32, 32, 32)
         }
+        .content {
+            border: 1px dotted beige;
+            text-align: justify;
+            width:33%;
+            margin:auto;
+            padding: 10px;
+        }
     </style>
 </head>
-<body style="text-align:center;">
-    <h2>Farmhand Item Generator</h2>
-   
-    Registry Name: <input type="text" id="Registry" value="iron_sword">
-    <p></p>
-    Item Name: <input type="text" id="ItemName" value="Iron Greatsword">
-    <p></p>
-    Rarity: <select id="Rarity"><option value="Common">Common</option>
-                                <option value="Uncommon">Uncommon</option>
-                                <option value="Rare">Rare</option>
-                                <option value="Very Rare">Very Rare</option>
-                                <option value="Legendary">Legendary</option>
-                                <option value="Quest">Quest</option>
-    </select>
-    <p></p>
-    Health: <input type="number" id="Health" value="0">
-    <select id="HpOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
-                             <option value="Precentage">Precentage</option>
-                             <option value="Multiplicative">Multiplicative</option>
-    </select>
-    <p></p>
-    Armor: <input type="number" id="Armor" value="0">
-    <select id="ArmorOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+<body>
+    <div class="content">
+        <h2>Farmhand Item Generator</h2>
+    
+        Registry Name: <input type="text" id="Registry" value="iron_sword">
+        <p></p>
+        Item Name: <input type="text" id="ItemName" value="Iron Greatsword">
+        <p></p>
+        Rarity: <select id="Rarity"><option value="Common">Common</option>
+                                    <option value="Uncommon">Uncommon</option>
+                                    <option value="Rare">Rare</option>
+                                    <option value="Very Rare">Very Rare</option>
+                                    <option value="Legendary">Legendary</option>
+                                    <option value="Quest">Quest</option>
+        </select>
+        <p></p>
+        Health: <input type="number" id="Health" value="0">
+        <select id="HpOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
                                 <option value="Precentage">Precentage</option>
                                 <option value="Multiplicative">Multiplicative</option>
-    </select>
-    <p></p>
-    Attack Speed: <select id="AttackSpeed"><option value="Very Slow">Very Slow</option>
-                                           <option value="Slow">Slow</option>
-                                           <option value="Normal">Normal</option>
-                                           <option value="Fast">Fast</option>
-                                           <option value="Very Fast">Very Fast</option>
-                                           <option value="Not Weapon">Not Weapon</option>
-    </select>
-    <p></p>
-    Damage: <input type="number" id="Damage" value="12">
-    <select id="DmgOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
-                              <option value="Precentage">Precentage</option>
-                              <option value="Multiplicative">Multiplicative</option>
-    </select>
-    <p></p>
-    Movement Speed: <input type="number" id="MovementSpeed" value="0.05">
-    <select id="MoveSpdOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
-                                  <option value="Precentage">Precentage</option>
-                                  <option value="Multiplicative">Multiplicative</option>
-    </select>
-    <p></p>
-    Slot: <select id="Slot"><option value="mainhand">mainhand</option>
-                            <option value="offhand">offhand</option>
-                            <option value="feet">feet</option>
-                            <option value="legs">legs</option>
-                            <option value="chest">chest</option>
-                            <option value="head">head</option>
-                            <option value="No Slot">No Slot</option>
-    </select>
-    <p></p>
-    Optional Lore: <input type="text" id="OptionalLore" value="lol cool sword">
-    <p></p>
-    Enchant glint?: <input type="checkbox" id="EnchantCheck">
-    <p></p>
-    Strip Attributes?: <input type="checkbox" id="AttStripCheck">
-    <p></p>
-    <button class="button" onclick="Generate()">Generate</button>
-    <p></p>
-    <button class="button" onclick="Copy()" id="final"></button>
+        </select>
+        <p></p>
+        Armor: <input type="number" id="Armor" value="0">
+        <select id="ArmorOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                                    <option value="Precentage">Precentage</option>
+                                    <option value="Multiplicative">Multiplicative</option>
+        </select>
+        <p></p>
+        Attack Speed: <select id="AttackSpeed"><option value="Very Slow">Very Slow</option>
+                                            <option value="Slow">Slow</option>
+                                            <option value="Normal">Normal</option>
+                                            <option value="Fast">Fast</option>
+                                            <option value="Very Fast">Very Fast</option>
+                                            <option value="Not Weapon">Not Weapon</option>
+        </select>
+        <p></p>
+        Damage: <input type="number" id="Damage" value="12">
+        <select id="DmgOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                                <option value="Precentage">Precentage</option>
+                                <option value="Multiplicative">Multiplicative</option>
+        </select>
+        <p></p>
+        Movement Speed: <input type="number" id="MovementSpeed" value="0.05">
+        <select id="MoveSpdOperation"><option value="Addition/Subtraction">Addition/Subtraction</option>
+                                    <option value="Precentage">Precentage</option>
+                                    <option value="Multiplicative">Multiplicative</option>
+        </select>
+        <p></p>
+        Slot: <select id="Slot"><option value="mainhand">mainhand</option>
+                                <option value="offhand">offhand</option>
+                                <option value="feet">feet</option>
+                                <option value="legs">legs</option>
+                                <option value="chest">chest</option>
+                                <option value="head">head</option>
+                                <option value="No Slot">No Slot</option>
+        </select>
+        <p></p>
+        Optional Lore: <input type="text" id="OptionalLore" value="lol cool sword">
+        <p></p>
+        CustomModelData: <input type="number" id="CModelData" value="-1">
+        <p></p>
+        Enchant glint?: <input type="checkbox" id="EnchantCheck">
+        <p></p>
+        Strip Attributes?: <input type="checkbox" id="AttStripCheck">
+        <p></p>
+        <button class="button" onclick="Generate()">Generate</button>
+        <p></p>
+        <button class="button" style="text-align:center;" onclick="Copy()" id="final">(‿ˠ‿)</button>
+    </div>
 
   
       
@@ -111,7 +122,9 @@
             var MSO = document.getElementById("MoveSpdOperation");
             var MSOIndex = MSO.selectedIndex;
 
-            console.log(HOIndex)
+            var CModelData = document.getElementById("CModelData").value;
+
+            console.log(CModelData);
 
             var R = document.getElementById("Rarity");
             var Rarity = R.options[R.selectedIndex].text;
@@ -242,15 +255,25 @@
             }
 
             Lore1 = Lore1 + ']}'
+
             if (document.getElementById("EnchantCheck").checked) {
                 if (document.getElementById("AttStripCheck").checked){
-                    document.getElementById("final").innerHTML = `/give @p `+Registry+`{Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                    if (CModelData >= 0){
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{CustomModelData:`+CModelData+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                    }else{
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                    }
                 }else {
                     document.getElementById("final").innerHTML = `/give @p `+Registry+`{Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
                 }
-            }else {
+
+            }else{
                 if (document.getElementById("AttStripCheck").checked){
-                    document.getElementById("final").innerHTML = `/give @p `+Registry+`{HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                    if (CModelData >= 0){
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{CustomModelData:`+CModelData+`,HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                    }else{
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                    }
                 }else {
                     document.getElementById("final").innerHTML = `/give @p `+Registry+`{HideFlags:127,Unbreakable:1b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
                 }            
