@@ -23,6 +23,13 @@
             margin:auto;
             padding: 10px;
         }
+        .colorbox {
+            background-color: rgb(40, 40, 40);
+            padding: 10px;
+            color: white;
+            border-radius: 15px;
+            border-color: gray;
+        }
     </style>
     <link rel = "icon" href = 
 "https://cdn.discordapp.com/attachments/660284955103985678/1057525887769256037/coollogo-com-31062621.png" 
@@ -98,6 +105,12 @@
         <p></p>
         Strip Attributes?: <input type="checkbox" id="AttStripCheck">
         <p></p>
+        R: <input type="number" id="red">
+        <p></p>
+        G: <input type="number" id="green">
+        <p></p>
+        B: <input type="number" id="blue"> <button class="button" onclick="SetRGB()">Set Color</button> <p></p> <div class="colorbox" id="color_box">Color</div>
+        <p></p>
         <button class="button" onclick="Generate()">Generate</button>
         <p></p>
         <button class="button" style="text-align:center;" onclick="Copy()" id="final">(‿ˠ‿)</button>
@@ -106,6 +119,18 @@
   
       
     <script>
+        function SetRGB(){
+            var red = document.getElementById('red').value;
+            var green = document.getElementById('green').value;
+            var blue = document.getElementById('blue').value;
+
+            document.getElementById('color_box').style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+        }
+        function RGBtoMC(r, g, b) {
+            var rf = r * 65536;
+            var gf = g * 256;
+            return (parseInt(rf) + parseInt(gf) + parseInt(b));
+        }
         function Copy() {
             navigator.clipboard.writeText(document.getElementById("final").innerHTML)
         }
@@ -134,6 +159,12 @@
             var Unbreakable = document.getElementById("UnbreakingCheck").checked
 
             var Durability = document.getElementById("Durability").value
+
+            var red = document.getElementById('red').value;
+            var green = document.getElementById('green').value;
+            var blue = document.getElementById('blue').value;
+
+            var Color = RGBtoMC(red, green, blue)
 
             if (Unbreakable){
                 Unbreakable = 1
@@ -276,23 +307,23 @@
             if (document.getElementById("EnchantCheck").checked) {
                 if (document.getElementById("AttStripCheck").checked){
                     if (CModelData >= 0){
-                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,CustomModelData:`+CModelData+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,CustomModelData:`+CModelData+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{color:`+Color+`,Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
                     }else{
-                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{color:`+Color+`,Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
                     }
                 }else {
-                    document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
+                    document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,Enchantments:[{id:"minecraft:mending",lvl:1s}],HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{color:`+Color+`,Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
                 }
 
             }else{
                 if (document.getElementById("AttStripCheck").checked){
                     if (CModelData >= 0){
-                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,CustomModelData:`+CModelData+`,HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,CustomModelData:`+CModelData+`,HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{color:`+Color+`,Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
                     }else{
-                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
+                        document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{color:`+Color+`,Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`} 1`;
                     }
                 }else {
-                    document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
+                    document.getElementById("final").innerHTML = `/give @p `+Registry+`{Damage:`+Durability+`,HideFlags:127,Unbreakable:`+Unbreakable+`b,display:{color:`+Color+`,Name:'{"text":"`+Name+`","color":"`+NameColor+`","italic":false}',Lore:`+Lore1+`,AttributeModifiers:[{AttributeName:"generic.max_health",Name:"generic.max_health",Amount:`+Health+`,Operation:`+HOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.armor",Name:"generic.armor",Amount:`+Armor+`,Operation:`+AOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_speed",Name:"generic.attack_speed",Amount:`+AttackSpeedNum+`,Operation:0,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.attack_damage",Name:"generic.attack_damage",Amount:`+Damage+`,Operation:`+DOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"},{AttributeName:"generic.movement_speed",Name:"generic.movement_speed",Amount:`+MovementSpeed+`,Operation:`+MSOIndex+`,UUID:[I;`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`,`+Math.round(Math.random(1)*1000000000)+`],Slot:"`+Slot+`"}]} 1`;
                 }            
             }
         }
